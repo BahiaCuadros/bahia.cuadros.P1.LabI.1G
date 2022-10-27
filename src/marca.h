@@ -8,11 +8,15 @@
 #ifndef MARCA_H_
 #define MARCA_H_
 
-struct Marca
-{
+typedef struct {
 	int id;
 	char descripcion[20];
-	int isEmpty;
-};
+}Marca;
 
+int imprimirArrayMarca ( Marca* pArray , int limite);
+int OrdenamientoAlfabeticoMarca ( Marca* pArray , int limite );
+int CopiararrayMarca ( Marca* arrayParacopiar,  Marca* arrayFinal,int tamano);
+int BuscadordeMarcaXDescripcion ( Marca * pArray, char* modelo, int Limite);
+int BuscadordeMarcaXID ( Marca* pArray, int ID, int Limite);
+int AltadeMarca ( Marca* final,int Contador);
 #endif /* MARCA_H_ */

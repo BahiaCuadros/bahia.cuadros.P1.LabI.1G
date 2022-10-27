@@ -8,13 +8,13 @@
 #ifndef FECHA_H_
 #define FECHA_H_
 
-struct Fecha
+typedef struct
 {
 	int dia;
 	int mes;
 	int anioo;
-	int isEmpty;
-};
+}Fecha;
 
-int ingresarFecha(struct Fecha *auxFecha);
+int ingresarFecha( Fecha *auxFecha);
+void imprimirFecha( Fecha auxFecha);
 #endif /* FECHA_H_ */

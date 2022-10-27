@@ -12,15 +12,15 @@
 #include "servicio.h"
 #include "fecha.h"
 
-struct Trabajo
+typedef struct
 {
 	int id;
 	int idNotebook;
 	int idServicio;
-	struct Fecha fecha;
+	Fecha fecha;
 	int isEmpty;
-};
+}Trabajo;
 
-int altaTrabajo(struct Notebook arrayNotebook[50],int contNote,struct Servicio arrayServicio[50],int contServ, struct Trabajo arrayTrabajo[50],int conTra);
-int listarTrabajo (struct Notebook arrayNotebook[50],int contNote,struct Servicio arrayServicio[50],int contServ, struct Trabajo arrayTrabajo[50],int conTra);
+int altaTrabajo( Notebook *arrayNotebook,int contNote, Servicio *arrayServicio,int contServ,  Trabajo *auxiliarTrabajo,int conTra);
+int listarTrabajo ( Notebook arrayNotebook[50],int contNote, Servicio arrayServicio[50],int contServ,  Trabajo arrayTrabajo[50],int conTra);
 #endif /* TRABAJO_H_ */

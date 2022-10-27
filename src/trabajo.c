@@ -16,57 +16,56 @@
 #include "utnIngresodeDatos.h"
 #include "utn.ordenamiento.h"
 
-int altaTrabajo(struct Notebook arrayNotebook[50],int contNote,struct Servicio arrayServicio[50],int contServ, struct Trabajo arrayTrabajo[50],int conTra)
+int altaTrabajo( Notebook *arrayNotebook,int contNote, Servicio *arrayServicio,int contServ,  Trabajo *auxiliarTrabajo,int conTra)
 {
-int retorno = 0 ;
 char auxModelo[20];
 char auxServicio[20];
-struct Fecha auxFecha;
-arrayTrabajo[conTra].id=6000+conTra;
-if (arrayNotebook!=NULL && arrayServicio != NULL && arrayTrabajo != NULL )
+int memoriaModelo=-1;
+int memoriaServicio=-1;
+ Fecha auxFecha;
+auxiliarTrabajo->id=6000+conTra;
+if (arrayNotebook!=NULL && arrayServicio != NULL )
 {
-	getAlfaNumerica ("\n Por favor ingrese el Modelo de notebook","\n ERROR: Por favor ingrese el Modelo de notebook", 5, &auxModelo, 20);
-	for(int i=0;i<contNote;i++)
+	while(memoriaModelo==-1)
 	{
-		if(strcmp(arrayNotebook[i].modelo,auxModelo)==0)
-		{
-			arrayTrabajo[conTra].idNotebook=arrayNotebook[i].id;
-		}
-
+	getAlfaNumerica ("\n Por favor ingrese el Modelo de notebook","\n ERROR: Por favor ingrese el Modelo de notebook", 5, auxModelo, 20);
+	memoriaModelo=buscarNotebookXModelo (arrayNotebook,  auxModelo, contNote);
+	if (memoriaModelo==-1)
+	{
+		printf("modelo no encontrado");
 	}
-	getAlfaNumerica ("\n Por favor ingrese el Servicio de notebook","\n ERROR: Por favor ingrese el Servicio de notebook", 5, &auxServicio, 20);
-		for(int i=0;i<contServ;i++)
-		{
-			if(strcmp(arrayServicio[i].descripcion,auxServicio)==0)
-			{
-				arrayTrabajo[conTra].idServicio=arrayServicio[i].id;
-			}
-
-		}
-}
+	}
+	auxiliarTrabajo->idNotebook=arrayNotebook[memoriaModelo].id;
+	while(memoriaServicio==-1)
+	{
+	getAlfaNumerica ("\n Por favor ingrese el Servicio de notebook","\n ERROR: Por favor ingrese el Servicio de notebook", 5,auxServicio, 20);
+	memoriaServicio=buscarServicioXDescripcion (arrayServicio, auxServicio, contServ);
+	if(memoriaServicio==-1)
+	{
+		printf("Servicio no encontrado");
+	}
+	}
+	auxiliarTrabajo->idServicio=arrayServicio[memoriaServicio].id;
 	ingresarFecha(&auxFecha);
-	arrayTrabajo[conTra].fecha=auxFecha;
+	auxiliarTrabajo->fecha=auxFecha;
+	return 1;
+}
+return -1;
 }
 
-int listarTrabajo (struct Notebook arrayNotebook[50],int contNote,struct Servicio arrayServicio[50],int contServ, struct Trabajo arrayTrabajo[50],int conTra)
+int listarTrabajo ( Notebook *arrayNotebook,int contNote, Servicio *arrayServicio,int contServ,  Trabajo *arrayTrabajo,int conTra)
 {
-	for (int a=0;a<conTra; a++)
+	int memoriaServicio;
+	int memoriaModelo;
+	if(arrayNotebook !=NULL && contNote>0 && arrayServicio !=NULL && contServ>0 && arrayTrabajo != NULL && conTra >0)
 	{
-		for(int b = 0; b <contNote; b++)
+		for(int x=0;x<conTra;x++)
 		{
-			if (arrayNotebook[b].id==arrayTrabajo[a].idNotebook)
-			{
-				printf("\n Modelo de computadora: %s",arrayNotebook[b].modelo);
-			}
+			memoriaModelo=BuscadordeNotebookXID (arrayNotebook, arrayTrabajo[x].idNotebook, contNote);
+			memoriaServicio=BuscadordeSerivicioXID (arrayServicio,arrayTrabajo[x].idServicio , contServ);
+			printf("\n Tipo de trabajo %s\n Computadora: %s",arrayServicio[memoriaServicio].descripcion,arrayNotebook[memoriaModelo].modelo);
+			imprimirFecha(arrayTrabajo[x].fecha);
 		}
-		for(int b = 0; b <contServ; b++)
-				{
-					if (arrayServicio[b].id==arrayTrabajo[a].idServicio)
-					{
-						printf("\n Modelo de computadora: %s",arrayServicio[b].descripcion);
-						printf("\El precio es: $%f",arrayServicio[b].precio);
-					}
-				}
-		printf("\n Fecha: %d-%d-%d",arrayTrabajo[a].fecha.dia,arrayTrabajo[a].fecha.mes,arrayTrabajo[a].fecha.anioo);
 	}
+	return -1;
 }

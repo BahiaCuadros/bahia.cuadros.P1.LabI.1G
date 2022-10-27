@@ -8,13 +8,16 @@
 #ifndef SERVICIO_H_
 #define SERVICIO_H_
 
-struct Servicio
+typedef struct
 {
 	int id;
-	int descripcion[20];
+	char descripcion[20];
 	float precio;
-	int isEmpty;
-};
+}Servicio;
 
-
+int CopiararrayServicio ( Servicio* arrayParacopiar,  Servicio* arrayFinal,int tamano);
+int OrdenamientoAlfabeticoServicio ( Servicio* pArray , int limite );
+int imprimirArrayServicio ( Servicio* pArray , int limite);
+int buscarServicioXDescripcion ( Servicio *pArray, char* descripcion, int Limite);
+int BuscadordeSerivicioXID ( Servicio* pArray, int ID, int Limite);
 #endif /* SERVICIO_H_ */

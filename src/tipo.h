@@ -8,11 +8,16 @@
 #ifndef TIPO_H_
 #define TIPO_H_
 
-struct Tipo
+typedef struct
 {
 	int id;
 	char descripcion[20];
-	int isEmpty;
-};
+}Tipo;
 
+int CopiararrayTipo ( Tipo* arrayParacopiar,  Tipo* arrayFinal,int tamano);
+int OrdenamientoAlfabeticoTipo ( Tipo* pArray , int limite );
+int imprimirArrayTipo (Tipo *pArray , int limite);
+int buscarTipoXDescripcion ( Tipo *pArray, char* descripcion, int Limite);
+int BuscadordeTipoXID ( Tipo* pArray, int ID, int Limite);
+int AltadeTipo ( Tipo* final,int Contador);
 #endif /* TIPO_H_ */

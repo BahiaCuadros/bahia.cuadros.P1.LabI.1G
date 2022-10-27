@@ -96,7 +96,6 @@ static int getInt(int*pResultado)
 	}
 	return retorno;
 }
-
 /*
 BRIEF: Pide un NUMERO ENTERO O DECIMAL al usuario, verifica que cumpla con las condiciones establecidas por parametro.
 PARAM:  mensaje, mensaje de error, numero de intentos, maximo y minimo del numero, direccion de memoria donde va a guardarse el numero.
@@ -184,8 +183,6 @@ static int getFloat(float*pResultado)
 	}
 	return retorno;
 }
-
-
 /*
 BRIEF: Pide una PALABRA O FRASE FORMADA POR LETRAS al usuario, verifica que cumpla con las condiciones establecidas por parametro.
 PARAM:  mensaje, mensaje de error, numero de intentos, direccion de memoria donde va a guardarse el numero.
@@ -259,8 +256,6 @@ static int getCharL(char* AuxPalabra,int tamano)
 	}
 	return retorno;
 }
-
-
 /*
 BRIEF: Pide una PALABRA O FRASE FORMADA POR LETRAS Y NUMEROS al usuario, verifica que cumpla con las condiciones establecidas por parametro.
 PARAM:  mensaje, mensaje de error, numero de intentos, direccion de memoria donde va a guardarse el numero.
@@ -329,7 +324,6 @@ static int getCharLN(char* AuxPalabra,int tamano)
 	}
 	return retorno;
 }
-
 /*
 BRIEF: Pide un NUMERO DE TELEFONO, CONFORMADO POR NUMEROS Y UN SOLO GUION al usuario, verifica que cumpla con las condiciones establecidas por parametro.
 PARAM:  mensaje, mensaje de error, numero de intentos, direccion de memoria donde va a guardarse el numero.
