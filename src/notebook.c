@@ -290,19 +290,19 @@ int BajaNotebook( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo,
 {
 
 	int id=-1;
-	int memoriaNotebook;
+	int memoriaNotebook=-1;
 	if(contadorNote>0&&contadorTipo>0&&contadorMarca>0)
 	{
 		while(memoriaNotebook==-1)
 		{
-		getNumeroE("ingrese ID de la Notebook que desea dar de baja","\nERROR\ningrese ID de la Notebook que desea dar de baja,usando solo numeros", 3000, 4000, 5,&id);
+		getNumeroE("\ningrese ID de la Notebook que desea dar de baja","\nERROR\ningrese ID de la Notebook que desea dar de baja,usando solo numeros", 3000, 4000, 5,&id);
 		memoriaNotebook=BuscadordeNotebookXID (arrayNotebook, id, contadorNote);
 		if(memoriaNotebook==-1)
 		{
 			printf("\nNotebook no encontrada, por favor vuelva a ingresar:");
 		}
 		}
-		printf("La siguiente marca fue dada de Baja:");
+		printf("La siguiente Notebook fue dada de Baja:");
 		arrayNotebook[memoriaNotebook].isEmpty=0;
 		imprimirNotebook (arrayMarca, arrayNotebook[memoriaNotebook],arrayTipo, contadorMarca,contadorNote, contadorTipo,arrayCliente,contadorCliente);
 		return 1;

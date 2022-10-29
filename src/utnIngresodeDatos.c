@@ -30,7 +30,7 @@ int getNumeroE (char *Mensaje,char *MensajeError, int minimo, int maximo, int in
 		printf("%s",Mensaje);
 		if(getInt(&numero)==1)
 		{
-			if(numero>minimo&&numero<maximo)
+			if(numero>=minimo&&numero<=maximo)
 			{
 			*pResultado=numero;
 			retorno = 1;

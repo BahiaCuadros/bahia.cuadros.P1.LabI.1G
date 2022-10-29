@@ -106,11 +106,11 @@ Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "f50",  arrayCliente
 contadorNote++;
 Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "ba50",  arrayCliente[4].id, arrayMarca[2].id,  arrayTipo[0].id, 5000);
 contadorNote++;
-Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "l000",  arrayCliente[0].id, arrayMarca[0].id,  arrayTipo[0].id, 200);
+Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "l000",  arrayCliente[1].id, arrayMarca[0].id,  arrayTipo[0].id, 200);
 contadorNote++;
 Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "ss200",  arrayCliente[2].id, arrayMarca[1].id,  arrayTipo[0].id, 150);
 contadorNote++;
-Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "tre999",  arrayCliente[6].id,  arrayMarca[1].id,  arrayTipo[0].id, 120);
+Hardcodeo(&arrayNotebook[contadorNote],  3000+contadorNote, "tre999",  arrayCliente[2].id,  arrayMarca[1].id,  arrayTipo[0].id, 120);
  contadorNote++;
 while(opcionMenu!='K')
 {
