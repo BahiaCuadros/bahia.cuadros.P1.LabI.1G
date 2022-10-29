@@ -19,4 +19,5 @@ int CopiararrayMarca ( Marca* arrayParacopiar,  Marca* arrayFinal,int tamano);
 int BuscadordeMarcaXDescripcion ( Marca * pArray, char* modelo, int Limite);
 int BuscadordeMarcaXID ( Marca* pArray, int ID, int Limite);
 int AltadeMarca ( Marca* final,int Contador);
+void imprimirMarca(Marca Marcaimprimir);
 #endif /* MARCA_H_ */

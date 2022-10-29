@@ -9,12 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "fecha.h"
 #include "marca.h"
-#include "tipo.h"
-#include "notebook.h"
-#include "servicio.h"
-#include "trabajo.h"
 #include "utnIngresodeDatos.h"
 #include "utn.ordenamiento.h"
 /*
@@ -77,6 +72,10 @@ int imprimirArrayMarca ( Marca* pArray , int limite)
 		return 1;
 	}
 	return -1;
+}
+void imprimirMarca(Marca Marcaimprimir)
+{
+	printf ("\n Id: %d\n Nombre de la marca: %s",Marcaimprimir.id,Marcaimprimir.descripcion);
 }
 /*
 BRIEF: Busca en un array del tipo de dato MARCA, un elementro en particular, por DESCRIPCION.

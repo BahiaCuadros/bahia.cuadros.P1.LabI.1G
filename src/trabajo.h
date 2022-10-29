@@ -22,5 +22,5 @@ typedef struct
 }Trabajo;
 
 int altaTrabajo( Notebook *arrayNotebook,int contNote, Servicio *arrayServicio,int contServ,  Trabajo *auxiliarTrabajo,int conTra);
-int listarTrabajo ( Notebook arrayNotebook[50],int contNote, Servicio arrayServicio[50],int contServ,  Trabajo arrayTrabajo[50],int conTra);
+int listarTrabajo ( Notebook* arrayNotebook,int contNote, Servicio* arrayServicio,int contServ,  Trabajo* arrayTrabajo,int conTra);
 #endif /* TRABAJO_H_ */

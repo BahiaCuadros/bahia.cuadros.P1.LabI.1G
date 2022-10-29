@@ -20,4 +20,5 @@ int imprimirArrayTipo (Tipo *pArray , int limite);
 int buscarTipoXDescripcion ( Tipo *pArray, char* descripcion, int Limite);
 int BuscadordeTipoXID ( Tipo* pArray, int ID, int Limite);
 int AltadeTipo ( Tipo* final,int Contador);
+void imprimirtipo(Tipo Tipoimpreso);
 #endif /* TIPO_H_ */

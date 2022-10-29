@@ -9,12 +9,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "fecha.h"
 #include "marca.h"
 #include "tipo.h"
 #include "notebook.h"
 #include "servicio.h"
 #include "trabajo.h"
+#include "ecliente.h"
 #include "utnIngresodeDatos.h"
 #include "utn.ordenamiento.h"
 /*
@@ -22,12 +24,14 @@ BRIEF: Da de alta un dato tipo  Notebook.
 PARAM:  array tipo MArca, espacio de memoria para guardar el nuevo dato, array tipo Tipo, cantidad de elementos Marca, cantidad de elementos Notebook, cantidad de elementos Tipo.
 RETURN: si todos lo parametros estasn bien retorna 1 .
  */
-int AltaNotebook ( Marca *arrayMarca,  Notebook *auxNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo)
+int AltaNotebook ( Marca *arrayMarca,  Notebook *auxNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente*arrayCLientes, int contadorCliente)
 {
 	char auxMarca[20];
 	int auxposicionMarca= -1;
 	char auxTipo[20];
 	int auxposicionTipo= -1;
+	char auxNombre[20];
+	int auxposicionCliente=-1;
 	 Notebook auxiliar;
 
 	if(contadorMarca>=0 && contadorNote>=0 && contadorTipo >=0)
@@ -64,6 +68,16 @@ int AltaNotebook ( Marca *arrayMarca,  Notebook *auxNotebook,  Tipo *arrayTipo, 
 		}
 		*auxNotebook=auxiliar;
 		return 1;
+		while(auxposicionCliente==-1)
+		{
+		getPalabra ("\nIngrese el nombre del Cliente ","\nERROR:\t utilice solo letras", 5,auxNombre,20);
+		auxposicionCliente= buscarClienteporNombre ( arrayCLientes,auxNombre,  contadorCliente);
+		if(auxposicionCliente==-1)
+		{
+			printf("\nCliente no encontrado");
+		}
+		}
+		auxiliar.idCliente=arrayCLientes[auxposicionCliente].id;
 	}
 	return -1;
 }
@@ -143,19 +157,13 @@ BRIEF: Imprime un array del tipo de dato Notebook.
 PARAM:  array tipo MArca, array a imprimir tipo Notebook, array tipo Tipo, cantidad de elementos Marca, cantidad de elementos Notebook, cantidad de elementos Tipo.
 RETURN: si todos lo parametros estasn bien retorna 1 .
  */
-int imprimirArrayNote ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo)
+int imprimirArrayNote ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente* arrayCliente, int contadorCliente)
 {
-
-	int auxposicionMarca;
-
-	int auxposicionTipo;
 	if( contadorNote > 0&&contadorTipo>0 && contadorMarca>0)
 	{
 		for (int i = 0 ; i< contadorNote ; i++)
 		{
-			auxposicionTipo=BuscadordeTipoXID (arrayTipo, arrayNotebook[i].idTipo , contadorTipo);
-			auxposicionMarca=BuscadordeMarcaXID(arrayMarca,arrayNotebook[i].idMarca,contadorMarca);
-			printf("\nID:%d\nModelo de la NOTEBOOK: %s\nTipo de NOTEBOOK:%s\nMarca:%s\nPrecio: :$%.2f",arrayNotebook[i].id,arrayNotebook[i].modelo,arrayTipo[auxposicionTipo].descripcion,arrayMarca[auxposicionMarca].descripcion,arrayNotebook[i].precio);
+			imprimirNotebook (arrayMarca,   arrayNotebook[i], arrayTipo, contadorMarca,  contadorNote, contadorTipo, arrayCliente,  contadorCliente);
 		}
 		return 1;
 	}
@@ -166,17 +174,18 @@ BRIEF: Imprime un dato del tipo de dato MARCA.
 PARAM:  array tipo MArca, variable a imprimir tipo Notebook, array tipo Tipo, cantidad de elementos Marca, cantidad de elementos Notebook, cantidad de elementos Tipo.
 RETURN: si todos lo parametros estasn bien retorna 1 .
  */
-int imprimirNotebook ( Marca *arrayMarca,  Notebook Notebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo)
+int imprimirNotebook ( Marca *arrayMarca,  Notebook Notebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente* arrayCliente, int contadorCliente)
 {
 	int auxposicionMarca;
-
+	int auxposicionCliente;
 	int auxposicionTipo;
 	if( contadorNote > 0&&contadorTipo>0 && contadorMarca>0)
 	{
-
+			auxposicionCliente= BuscadeClienteXID( arrayCliente, Notebook.idCliente,contadorCliente);
 			auxposicionTipo=BuscadordeTipoXID (arrayTipo, Notebook.idTipo , contadorTipo);
 			auxposicionMarca=BuscadordeMarcaXID(arrayMarca,Notebook.idMarca,contadorMarca);
-			printf("\nID:%d\nModelo de la NOTEBOOK: %s\nTipo de NOTEBOOK:%s\nMarca:%s\nPrecio: :$%.2f",Notebook.id,Notebook.modelo,arrayTipo[auxposicionTipo].descripcion,arrayMarca[auxposicionMarca].descripcion,Notebook.precio);
+			printf("\nID:%d\nModelo de la NOTEBOOK: %s\nTipo de NOTEBOOK:%s\nMarca:%s\nPrecio: :$%.2f\nCliente: %s",
+					Notebook.id,Notebook.modelo,arrayTipo[auxposicionTipo].descripcion,arrayMarca[auxposicionMarca].descripcion,Notebook.precio,arrayCliente[auxposicionCliente].Nombre);
 		return 1;
 	}
 	return -1;
@@ -223,7 +232,7 @@ BRIEF: Modifica precio o tipo de un dato tipo Notebook, en un array.
 PARAM:  array tipo MArca, array en donde buscar tipo Notebook, array tipo Tipo, cantidad de elementos Marca, cantidad de elementos Notebook, cantidad de elementos Tipo.
 RETURN: si todos lo parametros estasn bien retorna 1 .
  */
-int ModificarNotebook ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo)
+int ModificarNotebook ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente*arrayCliente,int contadorCliente)
 {
 	char auxModelo[20];
 	int auxPosicionNotebook=-1;
@@ -245,7 +254,7 @@ int ModificarNotebook ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arra
 			}
 		}
 		printf("\n El modelo que desea modificar es:\n");
-		imprimirNotebook (arrayMarca, arrayNotebook[auxPosicionNotebook], arrayTipo,contadorMarca,  contadorNote, contadorTipo);
+		imprimirNotebook (arrayMarca, arrayNotebook[auxPosicionNotebook], arrayTipo,contadorMarca,  contadorNote, contadorTipo,arrayCliente,contadorCliente);
 		getNumeroE ("\n 1) SI\n 2) NO","\nERROR\n 1) SI\n 2) NO", 1, 2, 5, &Confirmacion);
 		}
 		getNumeroE ("\nModificar\n 1)Precio\n 2) Tipo\n 3)Volver al menu anterior","\nERROR\nModificar 1)Tipo \n 2) Precio\n 3)Volver al menu anterior", 1, 3, 5, &menu);
@@ -277,8 +286,9 @@ int ModificarNotebook ( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arra
 		}
 	return -1;
 }
-int BajaNotebook( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo)
+int BajaNotebook( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente* arrayCliente, int contadorCliente)
 {
+
 	int id=-1;
 	int memoriaNotebook;
 	if(contadorNote>0&&contadorTipo>0&&contadorMarca>0)
@@ -294,8 +304,25 @@ int BajaNotebook( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo,
 		}
 		printf("La siguiente marca fue dada de Baja:");
 		arrayNotebook[memoriaNotebook].isEmpty=0;
-		imprimirNotebook (arrayMarca, arrayNotebook[memoriaNotebook],arrayTipo, contadorMarca,contadorNote, contadorTipo);
+		imprimirNotebook (arrayMarca, arrayNotebook[memoriaNotebook],arrayTipo, contadorMarca,contadorNote, contadorTipo,arrayCliente,contadorCliente);
 		return 1;
 	}
 	return -1;
+}
+void imprimirArrayOrdenado( Marca *arrayMarca,  Notebook *arrayNotebook,  Tipo *arrayTipo, int contadorMarca, int contadorNote,int contadorTipo,Cliente* arrayCliente, int contadorCliente)
+{
+	Notebook arrayOrdenado[50];
+	Copiararray(arrayOrdenado,arrayNotebook,contadorNote);
+	OrdenamientoNumericoNote(arrayOrdenado,contadorNote,0);
+	imprimirArrayNote( arrayMarca, arrayOrdenado,  arrayTipo, contadorMarca,  contadorNote,contadorTipo,arrayCliente, contadorCliente);
+}
+void Hardcodeo(Notebook* NoteFinal,int id,char modelo[20],int idCliente,int idMarca,int idTipo,float precio)
+{
+	NoteFinal->id=id;
+	NoteFinal->idCliente=idCliente;
+	NoteFinal->idMarca=idMarca;
+	NoteFinal->idTipo=idTipo;
+	NoteFinal->isEmpty=1;
+	strcpy(NoteFinal->modelo,modelo);
+	NoteFinal->precio=precio;
 }

@@ -126,7 +126,7 @@ int getNumeroD (char *Mensaje,char *MensajeError, float minimo, float maximo, in
 						while(intentos>0)
 							{
 							printf("%s",MensajeError);
-							if(getInt(&numero)==1)
+							if(getFloat(&numero)==1)
 							{
 							*pResultado=numero;
 							return 1;
